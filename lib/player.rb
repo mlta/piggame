@@ -67,47 +67,22 @@ class CautiousPlayer < Player
   end
 end
 
-class StopsEven < Player
-  def stops_even
-    num = rand(1..100)
-    if num % 2 == 0
-      @turn_over = true
-    end
-  end
-end
-
-class StopsOdd < Player
-  def StopsOdd
-    num = rand(1..100)
-    if num % 2 != 0
-      @turn_over = false
-    end
-  end
-end
-
-class StopsScore < Player
-  def stops_score
-    if @turn_score == 3
-      @turn_over
-    else
-      super roll_again
-    end
-  end
-end
-
-class StopsRolls < Player
-  def stops_rolls
-    if roll == 11
-      @turn_over
-    else
-      super roll_again
-    end
-  end
-end
-
-class GreedyPlayer < Player
+class ModerateP < Player
   def roll_again?
+    super && @turn_score < 40
+  end
+end
+
+class GreedyP < Player
+  def roll_again?
+    super && @turn_score < 45
+  end
+end
+
+class VGreedyP < Player
+  def stops_score
     super && @turn_score < 50
   end
 end
+
 ## TODO add your own Player subclasses here
